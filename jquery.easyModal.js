@@ -2,7 +2,8 @@
 * easyModal.js v1.3.1
 * A minimal jQuery modal that works with your CSS.
 * Author: Flavius Matis - http://flaviusmatis.github.com/
-* URL: https://github.com/flaviusmatis/easyModal.js
+* Modified by: Bart Nowak - bnowak@bnowak.com
+* URL: https://github.com/bartlomn
 */
 
 /*jslint browser: true*/
@@ -66,12 +67,14 @@
 
                 $modal.css({
                     'display': 'none',
-                    'position' : 'fixed',
+                    'position' : 'absolute',
+                    'margin-left': 'auto',
+                    'margin-top': 'auto',
                     // When updateZIndexOnOpen is set to true, we avoid computing the z-index on initialization,
                     // because the value would be replaced when opening the modal.
-                    'z-index': (o.updateZIndexOnOpen ? 0 : o.zIndex() + 1),
-                    'left' : parseInt(o.left, 10) > -1 ? o.left + 'px' : 50 + '%',
-                    'top' : parseInt(o.top, 10) > -1 ? o.top + 'px' : 50 + '%'
+                    'z-index': (o.updateZIndexOnOpen ? 0 : o.zIndex() + 1)/*,
+                     'left' : parseInt(o.left, 10) > -1 ? o.left + 'px' : 50 + '%',
+                     'top' : parseInt(o.top, 10) > -1 ? o.top + 'px' : 50 + '%'*/
                 });
 
                 $modal.bind('openModal', function () {
@@ -83,8 +86,8 @@
                     }
                     $modal.css({
                         'display' : 'block',
-                        'margin-left' : (parseInt(o.left, 10) > -1 ? 0 : -($modal.outerWidth() / 2)) + 'px',
-                        'margin-top' : (parseInt(o.top, 10) > -1 ? 0 : -($modal.outerHeight() / 2)) + 'px',
+                        //'margin-left' : (parseInt(o.left, 10) > -1 ? 0 : -($modal.outerWidth() / 2)) + 'px',
+                        //'margin-top' : (parseInt(o.top, 10) > -1 ? 0 : -($modal.outerHeight() / 2)) + 'px',
                         'z-index': modalZ
                     });
 
@@ -138,9 +141,7 @@
                 if (o.autoOpen) {
                     $modal.trigger('openModal');
                 }
-
             });
-
         }
     };
 
