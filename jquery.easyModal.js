@@ -68,13 +68,9 @@
                 $modal.css({
                     'display': 'none',
                     'position' : 'absolute',
-                    'margin-left': 'auto',
-                    'margin-top': 'auto',
                     // When updateZIndexOnOpen is set to true, we avoid computing the z-index on initialization,
                     // because the value would be replaced when opening the modal.
-                    'z-index': (o.updateZIndexOnOpen ? 0 : o.zIndex() + 1)/*,
-                     'left' : parseInt(o.left, 10) > -1 ? o.left + 'px' : 50 + '%',
-                     'top' : parseInt(o.top, 10) > -1 ? o.top + 'px' : 50 + '%'*/
+                    'z-index': (o.updateZIndexOnOpen ? 0 : o.zIndex() + 1)
                 });
 
                 $modal.bind('openModal', function () {
