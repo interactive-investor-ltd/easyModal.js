@@ -60,7 +60,8 @@
                     'left': 0,
                     'height': '100%',
                     'width': '100%',
-                    'background': o.overlayColor,
+                    'background': '#333',
+                    // 'background': o.overlayColor,
                     'opacity': o.overlayOpacity,
                     'overflow': 'auto'
                 }).appendTo(o.overlayParent);
