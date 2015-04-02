@@ -60,8 +60,7 @@
                     'left': 0,
                     'height': '100%',
                     'width': '100%',
-                    'background': '#333',
-                    // 'background': o.overlayColor,
+                    'background': o.overlayColor,
                     'opacity': o.overlayOpacity,
                     'overflow': 'auto'
                 }).appendTo(o.overlayParent);
@@ -120,10 +119,11 @@
 
                 // Close on overlay click
                 $overlay.click(function () {
-                    if (o.overlayClose) {
-                        $modal.trigger('closeModal');
-                    }
+                    // if (o.overlayClose) {
+                    //     $modal.trigger('closeModal'); 
+                    // }
                 });
+
 
                 $(document).keydown(function (e) {
                     // ESCAPE key pressed
