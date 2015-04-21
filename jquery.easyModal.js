@@ -67,7 +67,7 @@
 
                 $modal.css({
                     'display': 'none',
-                    'position' : 'absolute',
+                    'position' : 'fixed',
                     // When updateZIndexOnOpen is set to true, we avoid computing the z-index on initialization,
                     // because the value would be replaced when opening the modal.
                     'z-index': (o.updateZIndexOnOpen ? 0 : o.zIndex() + 1)
@@ -115,10 +115,12 @@
 
                 // Close on overlay click
                 $overlay.click(function () {
-                    if (o.overlayClose) {
-                        $modal.trigger('closeModal');
-                    }
+                    // todo: properly implment as isModal param
+                    // if (o.overlayClose) {
+                    //     $modal.trigger('closeModal'); 
+                    // }
                 });
+
 
                 $(document).keydown(function (e) {
                     // ESCAPE key pressed
