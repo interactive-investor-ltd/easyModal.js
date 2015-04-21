@@ -119,10 +119,11 @@
 
                 // Close on overlay click
                 $overlay.click(function () {
-                    if (o.overlayClose) {
-                        $modal.trigger('closeModal');
-                    }
+                    // if (o.overlayClose) {
+                    //     $modal.trigger('closeModal'); 
+                    // }
                 });
+
 
                 $(document).keydown(function (e) {
                     // ESCAPE key pressed
