@@ -82,8 +82,6 @@
                     }
                     $modal.css({
                         'display' : 'block',
-                        //'margin-left' : (parseInt(o.left, 10) > -1 ? 0 : -($modal.outerWidth() / 2)) + 'px',
-                        //'margin-top' : (parseInt(o.top, 10) > -1 ? 0 : -($modal.outerHeight() / 2)) + 'px',
                         'z-index': modalZ
                     });
 
@@ -93,19 +91,26 @@
                         // onOpen callback receives as argument the modal window
                         o.onOpen($modal[0]);
                     }
+
+                    // disable scroll
+                    $('body').css({'overflow-y': 'hidden'});
                 });
 
                 $modal.bind('closeModal', function () {
+                    var $body = $('body');
                     if(o.transitionIn !== '' && o.transitionOut !== ''){
                         $modal.removeClass(o.transitionIn).addClass(o.transitionOut);
                         $modal.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
                             $modal.css('display', 'none');
                             $overlay.css('display', 'none');
+                            // enable scroll
+                            $body.css({'overflow-y': 'auto'});
                         });
                     }
                     else {
                         $modal.css('display', 'none');
                         $overlay.css('display', 'none');
+                        $body.css({'overflow-y': 'auto'});
                     }
                     if (o.onClose && typeof o.onClose === 'function') {
                         // onClose callback receives as argument the modal window
