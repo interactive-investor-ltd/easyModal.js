@@ -1,10 +1,10 @@
 /**
-* easyModal.js v1.3.1
-* A minimal jQuery modal that works with your CSS.
-* Author: Flavius Matis - http://flaviusmatis.github.com/
-* Modified by: Bart Nowak - bnowak@bnowak.com
-* URL: https://github.com/bartlomn
-*/
+ * easyModal.js v1.3.1
+ * A minimal jQuery modal that works with your CSS.
+ * Author: Flavius Matis - http://flaviusmatis.github.com/
+ * Modified by: Bart Nowak - bnowak@bnowak.com
+ * URL: https://github.com/bartlomn
+ */
 
 /*jslint browser: true*/
 /*global jQuery*/
@@ -93,24 +93,27 @@
                     }
 
                     // disable scroll
-                    $('body').css({'overflow-y': 'hidden'});
+                    $('body').css({'overflow': 'hidden'});
+                    $('body').on('wheel.modal mousewheel.modal touchmove', function () {return false;});
                 });
 
                 $modal.bind('closeModal', function () {
                     var $body = $('body');
                     if(o.transitionIn !== '' && o.transitionOut !== ''){
                         $modal.removeClass(o.transitionIn).addClass(o.transitionOut);
-                        $modal.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+                        $modal.on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
                             $modal.css('display', 'none');
                             $overlay.css('display', 'none');
                             // enable scroll
-                            $body.css({'overflow-y': 'auto'});
+                            $body.css({'overflow': 'auto'});
+                            $('body').off('wheel.modal mousewheel.modal touchmove');
                         });
                     }
                     else {
                         $modal.css('display', 'none');
                         $overlay.css('display', 'none');
-                        $body.css({'overflow-y': 'auto'});
+                        $body.css({'overflow': 'auto'});
+                        $('body').off('wheel.modal mousewheel.modal touchmove');
                     }
                     if (o.onClose && typeof o.onClose === 'function') {
                         // onClose callback receives as argument the modal window
@@ -120,9 +123,9 @@
 
                 // Close on overlay click
                 $overlay.click(function () {
-                    // todo: properly implment as isModal param
+                    // todo: properly implment as isModal param to get passed via open call
                     // if (o.overlayClose) {
-                    //     $modal.trigger('closeModal'); 
+                    //     $modal.trigger('closeModal');
                     // }
                 });
 
