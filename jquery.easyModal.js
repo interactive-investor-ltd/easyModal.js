@@ -94,7 +94,15 @@
 
                     // disable scroll
                     $('body').css({'overflow': 'hidden'});
-                    $('body').on('wheel.modal mousewheel.modal touchmove', function () {return false;});
+                    $('body').on('wheel.modal mousewheel.modal touchmove', function (e) {
+                        // todo externalise as a param
+                        var $modalWrapper = $('.modal-wrapper.trade-modal');
+                        var $target = $(e.target);
+                        // we want to allow scrolling for events originating inside the modal-wrapper
+                        // as long as the modal content does not fit inside and require scrolling
+                        return $modalWrapper.css('overflow-y') === 'scroll' &&
+                            $.inArray( $modalWrapper[0], $target.parents() ) > 0;
+                    });
                 });
 
                 $modal.bind('closeModal', function () {
