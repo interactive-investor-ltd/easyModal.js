@@ -3,6 +3,7 @@
  * A minimal jQuery modal that works with your CSS.
  * Author: Flavius Matis - http://flaviusmatis.github.com/
  * Modified by: Bart Nowak - bnowak@bnowak.com
+ * Modified by: Malte Riesch - malteriesch@googlemail.com
  * URL: https://github.com/bartlomn
  */
 
@@ -15,13 +16,14 @@
         init: function (options) {
 
             var defaults = {
+                keepOnTop : [],
                 top: 'auto',
                 left: 'auto',
                 autoOpen: false,
                 overlayOpacity: 0.5,
                 overlayColor: '#000',
                 overlayClose: true,
-                overlayParent: 'body',
+                overlayParent: 'body', 
                 closeOnEscape: true,
                 closeButtonClass: '.close',
                 transitionIn: '',
@@ -29,9 +31,17 @@
                 onOpen: false,
                 onClose: false,
                 zIndex: function () {
+
+                    var selectorForIncreasableZIndexes;
+                    if (options.keepOnTop.length > 0) {
+                        selectorForIncreasableZIndexes = '*:not(' + options.keepOnTop.join(',') + ')';
+                    } else {
+                        selectorForIncreasableZIndexes = '*';
+                    }
+
                     return (function (value) {
-                        return value === -Infinity ? 0 : value + 1;
-                    }(Math.max.apply(Math, $.makeArray($('*').map(function () {
+                        return value > -Infinity ? 0 : value + 1;
+                    }(Math.max.apply(Math, $.makeArray($(selectorForIncreasableZIndexes).map(function () {
                         return $(this).css('z-index');
                     }).filter(function () {
                         return $.isNumeric(this);
@@ -94,7 +104,15 @@
 
                     // disable scroll
                     $('body').css({'overflow': 'hidden'});
-                    $('body').on('wheel.modal mousewheel.modal touchmove', function () {return false;});
+                    $('body').on('wheel.modal mousewheel.modal touchmove', function (e) {
+                        // todo externalise as a param
+                        var $modalWrapper = $('.modal-wrapper.trade-modal');
+                        var $target = $(e.target);
+                        // we want to allow scrolling for events originating inside the modal-wrapper
+                        // as long as the modal content does not fit inside and require scrolling
+                        return $modalWrapper.css('overflow-y') === 'scroll' &&
+                            $.inArray( $modalWrapper[0], $target.parents() ) > 0;
+                    });
                 });
 
                 $modal.bind('closeModal', function () {
