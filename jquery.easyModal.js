@@ -40,7 +40,7 @@
                     }
 
                     return (function (value) {
-                        return value > -Infinity ? 0 : value + 1;
+                        return value === -Infinity ? 0 : value + 1;
                     }(Math.max.apply(Math, $.makeArray($(selectorForIncreasableZIndexes).map(function () {
                         return $(this).css('z-index');
                     }).filter(function () {
