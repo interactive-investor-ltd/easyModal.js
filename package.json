@@ -1,5 +1,6 @@
 {
   "name": "easyModal",
   "description": "fork of easyModal",
-  "version": "0.0.9"
+  "version": "0.0.10",
+  "main": "./jquery.easyModal.js"
 }
